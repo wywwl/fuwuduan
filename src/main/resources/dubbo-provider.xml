@@ -18,9 +18,11 @@
 
     <!-- Bean 聲明  和本地bean一样实现服务 -->
     <bean id="stuService" class="com.jk.service.StudentServiceImpl" />
-
-
+    <bean id="activeService" class="com.jk.service.activeService.ActiveServiceImpl" />
+    <bean id="userService" class="com.jk.service.userService.UserServiceImpl" />
 
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.jk.service.StudentService"  ref="stuService" />
+    <dubbo:service interface="com.jk.service.activeService.ActiveService" ref="activeService"  timeout="1200000" />
+    <dubbo:service interface="com.jk.service.userService.UserService" ref="userService"  timeout="1200000" />
 </beans>
