@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.StudentDao" >
+
+    <select id="getCount" parameterType="com.jk.model.Advertisement" resultType="long">
+        select count(*) from t_advertisement
+    </select>
+
+    <select id="queryList" resultType="com.jk.model.Advertisement">
+        select * from t_advertisement
+        limit #{st},#{rows}
+    </select>
+
+    <delete id="remUserById"  parameterType="string">
+        delete from t_advertisement where id in
+        <foreach collection="array" item="ids" index="index" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
+
+    <insert id="addStu" parameterType="com.jk.model.Advertisement" >
+    insert into t_advertisement (id,text,img,enterprise,enterprisephone,enterpriseemail,starttime,endtime)
+    values (#{id}, #{text}, #{img},#{enterprise}, #{enterprisephone}, #{enterpriseemail},
+      #{starttime},#{endtime})
+  </insert>
+
+    <select id="getStuById" parameterType="com.jk.model.Advertisement" resultType="com.jk.model.Advertisement">
+  	select id,text , img ,enterprise , enterprisephone,enterpriseemail ,  starttime,endtime
+  	from t_advertisement where id = #{id}
+  	</select>
+
+        <update id="updateStu" parameterType="com.jk.model.Advertisement">
+	  update t_advertisement set text = #{text},img = #{img},enterprise = #{enterprise},
+	  enterprisephone = #{enterprisephone},enterpriseemail = #{enterpriseemail},starttime = #{starttime},
+	  endtime = #{endtime} where id = #{id}
+       </update>
+
+
+</mapper>
