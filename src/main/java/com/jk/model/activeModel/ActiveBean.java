@@ -1,13 +1,12 @@
 package com.jk.model.activeModel;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 王玉荣
- *
- * 这是用户登陆的
  */
-public class ActiveBean {
+public class ActiveBean implements Serializable {
 
     private Integer hid;
 
@@ -17,11 +16,13 @@ public class ActiveBean {
 
     private Date startdate;
 
-    private Date  enddate;
+    private Date enddate;
 
     private String browse;
 
     private String Fabulous;
+
+    private String himg;
 
     public Integer getHid() {
         return hid;
@@ -77,5 +78,13 @@ public class ActiveBean {
 
     public void setFabulous(String fabulous) {
         Fabulous = fabulous;
+    }
+
+    public String getHimg() {
+        return himg;
+    }
+
+    public void setHimg(String himg) {
+        this.himg = himg;
     }
 }

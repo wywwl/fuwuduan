@@ -7,23 +7,17 @@ import java.io.Serializable;
  */
 public class UserBean implements Serializable {
 
-    private static final long serialVersionUID = 3571598166973051170L;
-
     private Integer id;
-
     private String name;
-
     private  Integer sex;
-
     private Integer age;
-
     private String login;
-
     private String upwd;
-
     private String address;
-
     private String uemial;
+    private  String  file;
+    private  String   grade;
+    private   Integer  nbcount;
 
     public Integer getId() {
         return id;
@@ -87,5 +81,46 @@ public class UserBean implements Serializable {
 
     public void setUemial(String uemial) {
         this.uemial = uemial;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public Integer getNbcount() {
+        return nbcount;
+    }
+
+    public void setNbcount(Integer nbcount) {
+        this.nbcount = nbcount;
+    }
+
+    @Override
+    public String toString() {
+        return "UserBean{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sex=" + sex +
+                ", age=" + age +
+                ", login='" + login + '\'' +
+                ", upwd='" + upwd + '\'' +
+                ", address='" + address + '\'' +
+                ", uemial='" + uemial + '\'' +
+                ", file='" + file + '\'' +
+                ", grade='" + grade + '\'' +
+                ", nbcount=" + nbcount +
+                '}';
     }
 }

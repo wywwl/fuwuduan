@@ -1,5 +1,6 @@
 package com.jk.mapper.userMapper;
 
+import com.jk.model.activeModel.ActiveBean;
 import com.jk.model.userModel.UserBean;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
