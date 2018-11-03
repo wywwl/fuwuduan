@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 public class StudentServiceImpl implements StudentService {
 
 
+
     @Override
     public void hh() {
         System.out.println("成功了");
     }
 
-    @Autowired
-    private StudentDao studentDao;
+
 
 
 }

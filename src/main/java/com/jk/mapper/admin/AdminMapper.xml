@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.mapper.admin.AdminMapper">
+
+
+	<delete id="deleteAdmin" parameterType="String">
+		delete from t_admin where aid in
+		<foreach collection="array" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<insert id="addAdminForm">
+		insert into t_admin (name,upwd,login,sex,age,emial,ttime) values
+		(#{name},#{upwd},#{login},#{sex},#{age},#{emial},str_to_date(#{times},'%Y-%m-%d'))
+	</insert>
+
+
+	<insert id="addRtree" parameterType="list">
+		insert into t_role_tree (roleId,treeId) values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.roleId},#{item.treeId})
+		</foreach>
+	</insert>
+
+	<delete id="deleteRtree" parameterType="String">
+		delete from t_role_tree where roleId = #{value}
+	</delete>
+
+	<select id="getbokNode" parameterType="Integer" resultType="com.jk.model.admin.Trees">
+  		select tid,name as text,pid from t_tree where pid = #{value}
+  	</select>
+
+	<select id="getTreeRole" parameterType="String" resultType="com.jk.model.admin.RoleTrees">
+		select * from t_role_tree where roleId = #{value}
+	</select>
+
+
+	<insert id="addAdminRole" parameterType="list">
+		insert into t_admin_roles (adminId,roleId) values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.adminId},#{item.roleId})
+		</foreach>
+	</insert>
+
+	<delete id="deleteAdminRole" parameterType="String">
+		delete from t_admin_roles where adminId = #{value}
+	</delete>
+
+	<select id="getRole" resultType="com.jk.model.admin.Roles">
+		select * from t_role
+	</select>
+
+	<select id="getRoleId" parameterType="String" resultType="com.jk.model.admin.AdminRoles">
+		select * from t_admin_roles where adminId = #{value}
+	</select>
+
+
+	<select id="getAdminAll" resultType="com.jk.model.admin.Admins">
+		select ta.*,DATE_FORMAT(ta.ttime,'%Y-%m-%d') as times,GROUP_CONCAT(tr.rname) as roles from t_admin ta
+		LEFT JOIN t_admin_roles tar on ta.aid = tar.adminId
+		LEFT JOIN t_role tr on tar.roleId = tr.rid
+		GROUP BY ta.name
+		limit #{start},#{rows}
+	</select>
+
+	<select id="getAdminCount" resultType="long">
+		select count(*) from t_admin
+	</select>
+
+	<select id="getNode" resultType="com.jk.model.admin.Trees">
+  		select DISTINCT tt.tid,tt.name as text,tt.url as href,tt.pid from t_tree tt
+			LEFT JOIN t_role_tree trt on tt.tid = trt.treeId
+			LEFT JOIN t_role tr on trt.roleId = tr.rid
+			LEFT JOIN t_admin_roles tar on tr.rid = tar.roleId
+			where tar.adminId = #{admin} and tt.pid = #{pid}
+  	</select>
+
+
+	<select id="getUserByName" parameterType="String" resultType="com.jk.model.admin.Admins">
+		select * from t_admin where login = #{value}
+	</select>
+
+</mapper>

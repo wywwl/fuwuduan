@@ -7,10 +7,11 @@ import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
 @ImportResource(value = {"classpath:dubbo-provider.xml"})
-@MapperScan("com.jk.mapper")
+@MapperScan("com.jk.mapper.admin")
 public class FuwuduanApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(FuwuduanApplication.class, args);
     }
 }
+
