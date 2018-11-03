@@ -8,14 +8,14 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://192.168.1.101:3306/myproject?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://192.168.1.118:3306/myproject?useUnicode=true&characterEncoding=UTF-8
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
   redis:
-    host: 192.168.1.101
+    host: 192.168.1.108
     port: 6379
     jedis:
       pool:
