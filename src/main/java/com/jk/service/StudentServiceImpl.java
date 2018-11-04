@@ -16,8 +16,6 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentDao studentDao;
 
-
-
     @Override
     public Map<String, Object> queryList(int page, int rows, Advertisement advertisement) {
         Map<String, Object> map = new HashMap<>();
@@ -30,7 +28,6 @@ public class StudentServiceImpl implements StudentService {
         map.put("rows", ulist);
         return map;
     }
-
     @Override
     public void remUserById(String[] ids) {
         studentDao.remUserById(ids);
@@ -50,7 +47,6 @@ public class StudentServiceImpl implements StudentService {
     public void updateStu(Advertisement advertisement) {
         studentDao.updateStu(advertisement);
     }
-
 
     public void hh() {
         System.out.println("成功");

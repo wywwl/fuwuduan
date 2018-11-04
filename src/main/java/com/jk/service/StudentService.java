@@ -5,10 +5,10 @@ import com.jk.model.Advertisement;
 import java.util.Map;
 
 public interface StudentService {
-
+    /**
+     * 测试zok 连接
+     */
     void hh();
-
-
     Map<String, Object> queryList(int page, int rows, Advertisement advertisement);
 
     void remUserById(String[] ids);
@@ -18,4 +18,7 @@ public interface StudentService {
     Advertisement getStuById(Advertisement advertisement);
 
     void updateStu(Advertisement advertisement);
+
+
+
 }
