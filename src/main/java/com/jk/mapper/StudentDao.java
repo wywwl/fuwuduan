@@ -1,6 +1,12 @@
 package com.jk.mapper;
 
-public interface StudentDao {
+
+import javax.annotation.Resource;
+
+public interface StudentDao    {
+
 
 
 }
+
+

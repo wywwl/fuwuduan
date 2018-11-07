@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ImportResource;
 @SpringBootApplication
 @ImportResource(value = {"classpath:dubbo-provider.xml"})
 @MapperScan("com.jk.mapper")
+
 public class FuwuduanApplication {
 
     public static void main(String[] args) {

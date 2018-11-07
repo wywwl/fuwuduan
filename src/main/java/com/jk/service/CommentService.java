@@ -1,14 +1,14 @@
 package com.jk.service;
 
-import com.jk.model.Admins;
-import com.jk.model.Blog;
-import com.jk.model.Comment;
+import com.jk.model.*;
 import com.jk.util.ResultPage;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
-public interface CommentService {
+public interface CommentService   {
 
 
     /**
@@ -60,4 +60,28 @@ public interface CommentService {
      * 查询博客的信息
      */
     List<Blog> getBlogData(Blog blog);
+
+
+    //用户注册
+    void insert(UserBean user);
+
+    UserBean findbyid(UserBean user);
+
+    Boolean updategroupbyuser(Integer id, int groupvip);
+
+    Object isusername(String login);
+
+    void updateuseronlinetime(UserBean user);
+
+    void insertss(Jifen jifen);
+
+    int findnowcount(Jifen jifen);
+
+    Map<String, Object> login(UserBean user);
+
+  //修改密码
+    void update(UserBean user);
+   //登录 用户id
+   UserBean findbyuserid(Integer id);
+
 }

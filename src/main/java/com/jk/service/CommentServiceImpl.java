@@ -1,27 +1,34 @@
 package com.jk.service;
 
 import com.jk.mapper.CommentMapper;
-import com.jk.model.Admins;
-import com.jk.model.Blog;
-import com.jk.model.Comment;
+import com.jk.model.*;
+import com.jk.util.PublicStatic;
 import com.jk.util.ResultPage;
 import com.jk.util.StringUtil;
+import com.jk.util.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 
-public class CommentServiceImpl implements  CommentService {
+public class CommentServiceImpl   implements  CommentService {
 
     @Autowired
     private CommentMapper commentMepper;
 
-
+    @Autowired
+    private  HttpServletRequest request;
     @Override
     public List<Comment> queryComment(String bid) {
         String pid="0";
@@ -36,6 +43,7 @@ public class CommentServiceImpl implements  CommentService {
 
     @Override
     public void saveComment(Comment comment) {
+        comment.setId(StringUtil.getUUID());
         commentMepper.saveComment(comment);
     }
 
@@ -87,6 +95,121 @@ public class CommentServiceImpl implements  CommentService {
 
         return commentMepper.getBlogData(blog);
     }
+
+    @Override
+    public void insert(UserBean user) {
+        commentMepper.insert(user);
+    }
+
+    @Override
+    public UserBean findbyid(UserBean user) {
+
+        List<UserBean> list= commentMepper.find(user);
+        if(list.size()>0){
+            user=list.get(0);
+        }
+        return user;
+    }
+
+    @Override
+    public Boolean updategroupbyuser(Integer id, int groupvip) {
+        boolean b=true;
+        try {
+            commentMepper.delgroupbyuser(id);
+            GroupUser groupUser=new GroupUser();
+            groupUser.setGroupid(groupvip);
+            groupUser.setUserid(id);
+            commentMepper.insertgroupUser(groupUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+            b=false;
+        }
+        return b;
+    }
+
+    @Override
+    public Object isusername(String login) {
+        String flag="1";
+        UserBean user=new UserBean();
+        user.setLogin(login);
+        List<UserBean> list = commentMepper.find(user);
+        if(list.size()>0){
+            flag="0";
+        }
+        return flag;
+    }
+
+    @Override
+    public void updateuseronlinetime(UserBean user) {
+        commentMepper.updateuseronlinetime(user);
+
+    }
+
+    @Override
+    public void insertss(Jifen jifen) {
+        jifen.setCreatetime(Tool.getyyyyMMddHHmmss());
+        commentMepper.insertss(jifen);
+        commentMepper.updatejifen(jifen.getUserid());
+    }
+
+    @Override
+    //查询当天积分次数，只需要传入type
+    public int findnowcount(Jifen Jifen) {
+        return commentMepper.findnowcount(Jifen);
+    }
+
+
+
+    @Override
+    public Map<String, Object> login(UserBean user ) {
+        Map<String, Object> map=new HashMap<String, Object>();
+       if(user.getYanzhengma() !=null &&user.getYanzhengma().equals("")){
+           if(!user.getYanzhengma().equals(user.getYanzhengma())){
+               /*验证码错误！*/
+               map.put("flag","77");
+           }
+       }
+
+        String flag="99";
+        String s1 = Tool.MD5(user.getUpwds());
+        user.setUpwds(s1);
+
+        List<UserBean> list = commentMepper.find(user);
+        if(list.size()>0){
+            List<String> collect = list.stream().map(UserBean::getUpwds).collect(Collectors.toList());
+            String s = collect.toString();
+           /* String pwd = user.getUpwds();
+              pwd= Tool.MD5(pwd);*/
+
+            if(list.get(0).getUpwds().equals(user.getUpwds())){
+                UserBean userBean = list.get(0);
+                flag=list.get(0).getFlag();
+                if("1".equals(flag)){
+                    user=list.get(0);
+                    map.put("flag","66");
+                    map.put(PublicStatic.USER,  userBean);
+                      user.setLastlogintime(Tool.getyyyyMMddHHmmss());
+                    commentMepper.update(user);
+                  }
+
+            }
+        }else{
+            map.put("flag","88");
+        }
+        return map;
+    }
+
+    @Override
+    public void update(UserBean user) {
+        commentMepper.update(user);
+    }
+
+    @Override
+    public UserBean findbyuserid(Integer id) {
+
+            return  commentMepper.findInfoById(id);
+    }
+
 
     public List<Comment> getCommentByPage(Comment comment) {
         return commentMepper.getCommentByPage(comment);
