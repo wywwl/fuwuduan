@@ -38,4 +38,11 @@ public interface AdminMapper {
     void addAdminForm(@Param("name") String name,@Param("login")String login,@Param("upwd")String upwd,@Param("age")Integer age,@Param("sex")Integer sex,@Param("times")String times,@Param("emial")String emial);
 
     void deleteAdmin(String[] split);
+
+
+    List<Advertisement> gettest();
+
+    void updataAdvertisement(@Param("id")Integer id, @Param("newTime")long newTime);
+
+    void deleteAdvertisement(Integer id);
 }

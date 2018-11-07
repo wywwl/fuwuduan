@@ -152,5 +152,20 @@ public class AdminServiceImpl implements AdminService {
         adminMapper.deleteAdmin(ids.split(","));
     }
 
+    @Override
+    public List<Advertisement> gettest() {
+        return adminMapper.gettest();
+    }
+
+    @Override
+    public void updataAdvertisement(Integer id, long newTime) {
+        adminMapper.updataAdvertisement(id,newTime);
+    }
+
+    @Override
+    public void deleteAdvertisement(Integer id) {
+        adminMapper.deleteAdvertisement(id);
+    }
+
 
 }

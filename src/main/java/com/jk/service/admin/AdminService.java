@@ -1,9 +1,6 @@
 package com.jk.service.admin;
 
-import com.jk.model.admin.AdminRoles;
-import com.jk.model.admin.Admins;
-import com.jk.model.admin.Roles;
-import com.jk.model.admin.Trees;
+import com.jk.model.admin.*;
 
 import java.util.List;
 import java.util.Map;
@@ -79,5 +76,24 @@ public interface AdminService {
      * @return
      */
     void deleteAdmin(String ids);
+
+    /**
+     * 查询广告表
+     * @return
+     */
+    List<Advertisement> gettest();
+
+    /**
+     *修改广告表中的广告位所剩时间
+     * @param id
+     * @param newTime
+     */
+    void updataAdvertisement(Integer id, long newTime);
+
+    /**
+     *过期广告位删除
+     * @param id
+     */
+    void deleteAdvertisement(Integer id);
 
 }
