@@ -30,11 +30,11 @@ public class UserServiceImpl implements UserService {
 //			从集合中取出teacher对象   如果集合长度 >1  也默认使用第一个对象
             UserBean dbTea = teaList.get(0);
             //用页面传过来的密码 与 数据库中查出来的密码作对比
-            System.out.println(dbTea.getUpwd());
-            System.out.println(user.getUpwd());
+            System.out.println(dbTea.getUpwds());
+            System.out.println(user.getUpwds());
 
-            if(user.getUpwd().equals(dbTea.getUpwd())){
-                //如果一致 则登录成功
+            if(user.getUpwds().equals(dbTea.getUpwds())){
+                //如果一致 则登录成功upwds
                 flag = 2;
                 json.put("loginTeacher", dbTea);
             }

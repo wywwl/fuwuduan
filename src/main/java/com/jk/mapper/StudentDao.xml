@@ -19,9 +19,9 @@
     </delete>
 
     <insert id="addStu" parameterType="com.jk.model.Advertisement" >
-    insert into t_advertisement (id,text,img,enterprise,enterprisephone,enterpriseemail,starttime,endtime)
+    insert into t_advertisement (id,text,img,enterprise,enterprisephone,enterpriseemail,starttime,endtime,secondtime)
     values (#{id}, #{text}, #{img},#{enterprise}, #{enterprisephone}, #{enterpriseemail},
-      #{starttime},#{endtime})
+      #{starttime},#{endtime},#{secondtime})
   </insert>
 
     <select id="getStuById" parameterType="com.jk.model.Advertisement" resultType="com.jk.model.Advertisement">

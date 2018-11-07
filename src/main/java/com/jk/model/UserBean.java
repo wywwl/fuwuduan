@@ -1,4 +1,4 @@
-package com.jk.model.userModel;
+package com.jk.model;
 
 import java.io.Serializable;
 

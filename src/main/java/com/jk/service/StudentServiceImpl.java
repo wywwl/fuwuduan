@@ -5,6 +5,8 @@ import com.jk.model.Advertisement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,8 +36,15 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void addStu(Advertisement advertisement) {
-        studentDao.addStu(advertisement);
+    public void addStu(Advertisement advertisement){
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");//时间格式
+            long time = simpleDateFormat.parse(advertisement.getStarttime()).getTime();//转换成毫秒值
+            advertisement.setSecondtime(time);
+            studentDao.addStu(advertisement);
+        }catch (Exception e){
+
+        }
     }
 
     @Override

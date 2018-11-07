@@ -14,6 +14,15 @@ public class Advertisement implements Serializable {
     private String  enterpriseemail;
     private String   starttime;
     private String   endtime;
+    private long   secondtime;
+
+    public long getSecondtime() {
+        return secondtime;
+    }
+
+    public void setSecondtime(long secondtime) {
+        this.secondtime = secondtime;
+    }
 
     public Integer getId() {
         return id;
