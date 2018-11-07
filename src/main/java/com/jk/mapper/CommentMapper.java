@@ -1,21 +1,20 @@
 package com.jk.mapper;
 
-import com.jk.model.Blog;
-import com.jk.model.Comment;
+import com.jk.model.*;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-public interface CommentMapper {
+public interface CommentMapper   {
+
+
      void saveComment(Comment comment) ;
 
 
     int deleteByPrimaryKey(String id);
 
-    int insert(Comment record);
 
-    int insertSelective(Comment record);
 
     Comment selectByPrimaryKey(String id);
 
@@ -40,4 +39,24 @@ public interface CommentMapper {
     void addContent(@Param("comment") Comment comment,@Param("aid") Integer aid);
 
     List<Blog> getBlogData(Blog blog);
+
+    List<UserBean> find(UserBean user);
+
+    void insert(UserBean user);
+
+    void insertgroupUser(GroupUser groupUser);
+
+    void delgroupbyuser(Integer id);
+
+    void updateuseronlinetime(UserBean user);
+
+    int findnowcount(Jifen jifen);
+
+    void updatejifen(Integer userid);
+
+    void insertss(Jifen jifen);
+  //修改密码
+    void update(UserBean user);
+
+    UserBean findInfoById(Integer id);
 }

@@ -49,14 +49,70 @@ public class UserBean implements Serializable {
     private String groupname;
     //用户组id
     private Integer groupid;
+    private String yanzhengma;
 
-
-    public String getFile() {
-        return file;
+    public Integer getId() {
+        return id;
     }
 
-    public void setFile(String file) {
-        this.file = file;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getUpwds() {
+        return upwds;
+    }
+
+    public void setUpwds(String upwds) {
+        this.upwds = upwds;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getUemial() {
+        return uemial;
+    }
+
+    public void setUemial(String uemial) {
+        this.uemial = uemial;
     }
 
     public String getQianming() {
@@ -65,6 +121,14 @@ public class UserBean implements Serializable {
 
     public void setQianming(String qianming) {
         this.qianming = qianming;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
     }
 
     public String getCreatetime() {
@@ -131,67 +195,11 @@ public class UserBean implements Serializable {
         this.groupid = groupid;
     }
 
-    public Integer getId() {
-        return id;
+    public String getYanzhengma() {
+        return yanzhengma;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getSex() {
-        return sex;
-    }
-
-    public void setSex(Integer sex) {
-        this.sex = sex;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getUpwds() {
-        return upwds;
-    }
-
-    public void setUpwds(String upwds) {
-        this.upwds = upwds;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getUemial() {
-        return uemial;
-    }
-
-    public void setUemial(String uemial) {
-        this.uemial = uemial;
+    public void setYanzhengma(String yanzhengma) {
+        this.yanzhengma = yanzhengma;
     }
 }
