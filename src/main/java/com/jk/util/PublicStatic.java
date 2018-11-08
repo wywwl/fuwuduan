@@ -10,7 +10,6 @@ public class PublicStatic {
 	
 	//前台用户
 	public static final String USER="indexuser";
-	
 	//后台用户
 	public static final String ADMINUSER="adminuser";
 	

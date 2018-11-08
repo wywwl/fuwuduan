@@ -228,7 +228,10 @@
             <artifactId>javassist</artifactId>
             <version>3.18.2-GA</version>
         </dependency>
-      </dependencies>
+
+
+
+    </dependencies>
     <build>
         <resources>
             <resource>
