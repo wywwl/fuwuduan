@@ -1,15 +1,16 @@
 package com.jk.controller;
 
 
-import com.jk.model.Blog;
-import com.jk.model.Code;
+import com.jk.model.*;
 import com.jk.service.CodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequestMapping("CodeController")
@@ -33,6 +34,12 @@ public class CodeController {
 
     }
 
+    @RequestMapping("qyerycode")
+    public String qyerycode(Model model,Code code){
+     List<Code> list= codeService.qyerycode(code);
+     model.addAttribute("list",list);
+     return  "/view/code.jsp";
+    }
 
     /**
      *  代码模块后台系统：新增,修改   暂时未完成
@@ -102,6 +109,115 @@ public class CodeController {
 
         codeService.deleteBlog(blog);
     }
+    /*
+     *   博客模块前台系统：：跳转
+     *
+     * */
+    @RequestMapping("qyeryblog")
+    public String qyeryblog(Model model, Blog blog, UserBean userBean, Comment comment){
+        List<Blog> list= codeService.qyeryblog(blog);
+        List<UserBean> userBeanlist= codeService.qyeryznuser(userBean);
+        List<Comment>commentList=  codeService.querycommnet(comment);
+        model.addAttribute("list",list);
+        model.addAttribute("userBeanlist",userBeanlist);
+        model.addAttribute("commentList",commentList);
+        return  "/view/blog.jsp";
+    }
+
+    /*
+     *   代码模块前台系统：点击标题查询该Id的数据
+     *
+     * */
+    @RequestMapping("qyerycodejsp")
+    public String qyerycodejsp(Model model,Code code,UserBean userBean){
+        List<Code> list= codeService.qyerycodejsp(code);
+        List<UserBean> userBeanList= codeService.qyeryusercode(userBean);
+
+        model.addAttribute("list",list);
+        model.addAttribute("userBeanList",userBeanList);
+        return  "/view/qyerycodejsp.jsp";
+    }
+
+    /*
+     *
+     *   博客模块前台系统：点击标题查询该Id的数据
+     * */
+    @RequestMapping("qyeryblogjsp")
+    public String qyeryblogjsp(Model model,Blog blog,Comment comment){
+        List<Blog> list= codeService.qyeryblogjsp(blog);
+        List<Comment>commentList=  codeService.querycommnet(comment);
+        model.addAttribute("list",list);
+        model.addAttribute("commentList",commentList);
+        return  "/view/qyeryblogjsp.jsp";
+    }
+
+    /*
+    *   前台二级类型
+    * */
+    @RequestMapping("selectManage")
+    @ResponseBody
+    public String selectManage(TypesBean typesBean){
+        String list=codeService.selectManage();
+        return list;
+    }
+
+
+    /*
+     *
+     *   博客模块  个人空间
+     * */
+    @RequestMapping("qyeryuserinfo")
+
+    public String qyeryuserinfo(Model model,UserBean userBean){
+        List<UserBean> list= codeService.qyeryuserinfo(userBean);
+        model.addAttribute("list",list);
+        return  "/view/userinformation.jsp";
+    }
+
+    /*
+     *    代码模块点击右侧用户信息  跳转个人空间
+     *
+     * */
+
+    @RequestMapping("queryuser")
+    public String queryuser(Model model,UserBean userBean){
+      List<Code>list=  codeService.queryuser(userBean);
+        List<UserBean>userBeanlist=  codeService.userinfo(userBean);
+        Integer codecount =codeService.querycodecount(userBean);
+        Integer blogcount =codeService.queryblogcount(userBean);
+        Integer problemcount =codeService.problemcount(userBean);
+        model.addAttribute("list",list);
+        model.addAttribute("userBeanlist",userBeanlist);
+        model.addAttribute("codecount",codecount);
+        model.addAttribute("blogcount",blogcount);
+        model.addAttribute("problemcount",problemcount);
+        return "/view/userinformation.jsp";
+    }
+
+    /*
+     *    博客模块点击右侧用户信息  跳转个人空间
+     *
+     * */
+
+    @RequestMapping("querybloguser")
+    public String querybloguser(Model model,UserBean userBean){
+        List<Blog>list=  codeService.querybloguser(userBean);
+        model.addAttribute("list",list);
+        return "/view/userinformation.jsp";
+    }
+
+    @RequestMapping("addblog")
+    public void addblog(Blog blog){
+
+        codeService.addblog(blog);
+    }
+
+
+
+
+
+
+
 
 
 }

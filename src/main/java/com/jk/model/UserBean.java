@@ -16,8 +16,44 @@ public class UserBean implements Serializable {
     private String address;
     private String uemial;
     private  String  file;
-    private  String   grade;
+    private  Integer  grade;
+    private  String   gradeFile;
     private   Integer  nbcount;
+    private   String  createtime;
+    private   String  lastlogintime;
+    private   String  zhuceip;
+
+    public String getGradeFile() {
+        return gradeFile;
+    }
+
+    public void setGradeFile(String gradeFile) {
+        this.gradeFile = gradeFile;
+    }
+
+    public String getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
+    }
+
+    public String getLastlogintime() {
+        return lastlogintime;
+    }
+
+    public void setLastlogintime(String lastlogintime) {
+        this.lastlogintime = lastlogintime;
+    }
+
+    public String getZhuceip() {
+        return zhuceip;
+    }
+
+    public void setZhuceip(String zhuceip) {
+        this.zhuceip = zhuceip;
+    }
 
     public Integer getId() {
         return id;
@@ -91,11 +127,11 @@ public class UserBean implements Serializable {
         this.file = file;
     }
 
-    public String getGrade() {
+    public Integer getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(Integer grade) {
         this.grade = grade;
     }
 
@@ -120,7 +156,11 @@ public class UserBean implements Serializable {
                 ", uemial='" + uemial + '\'' +
                 ", file='" + file + '\'' +
                 ", grade='" + grade + '\'' +
+                ", gradeFile='" + gradeFile + '\'' +
                 ", nbcount=" + nbcount +
+                ", createtime='" + createtime + '\'' +
+                ", lastlogintime='" + lastlogintime + '\'' +
+                ", zhuceip='" + zhuceip + '\'' +
                 '}';
     }
 }
