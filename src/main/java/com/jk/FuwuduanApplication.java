@@ -11,6 +11,8 @@ import org.springframework.context.annotation.ImportResource;
 public class FuwuduanApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(FuwuduanApplication.class, args);
+
     }
 }
