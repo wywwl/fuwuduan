@@ -38,7 +38,7 @@ public class Comment  extends Page implements Serializable {
 
     private int commentNumber;//回复数
 
-    private int praiseCount;//点赞数
+    private int praiseCount;//踩数
 
     private Integer uid; //用户id
 
