@@ -1,6 +1,5 @@
 package com.jk.model;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * util
@@ -24,26 +23,6 @@ public class Problem implements Serializable  {
    private String grade;//登级
 
    private Integer nbcount;//牛币
-
-    private String craetDate;//问题发表时间
-
-    private Date newDate;
-
-    public Date getNewDate() {
-        return newDate;
-    }
-
-    public void setNewDate(Date newDate) {
-        this.newDate = newDate;
-    }
-
-    public String getCraetDate() {
-        return craetDate;
-    }
-
-    public void setCraetDate(String craetDate) {
-        this.craetDate = craetDate;
-    }
 
     public Integer getId() {
         return id;
@@ -129,11 +108,6 @@ public class Problem implements Serializable  {
                 ", jifen=" + jifen +
                 ", grade='" + grade + '\'' +
                 ", nbcount=" + nbcount +
-                ", craetDate='" + craetDate + '\'' +
                 '}';
-    }
-    //
-    public Problem() {
-        super();
     }
 }

@@ -14,7 +14,7 @@ public class Code  implements Serializable {
      private    String    code_content;
      private    Integer   code_nb;
      private    String    code_type_id ;
-     private    String    code_user_id;
+     private    Integer    code_user_id;
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
      private    Date      code_Release_date;
@@ -73,11 +73,11 @@ public class Code  implements Serializable {
         this.code_type_id = code_type_id;
     }
 
-    public String getCode_user_id() {
+    public Integer getCode_user_id() {
         return code_user_id;
     }
 
-    public void setCode_user_id(String code_user_id) {
+    public void setCode_user_id(Integer code_user_id) {
         this.code_user_id = code_user_id;
     }
 
@@ -169,7 +169,7 @@ public class Code  implements Serializable {
                 ", code_content='" + code_content + '\'' +
                 ", code_nb=" + code_nb +
                 ", code_type_id='" + code_type_id + '\'' +
-                ", code_user_id='" + code_user_id + '\'' +
+                ", code_user_id=" + code_user_id +
                 ", code_Release_date=" + code_Release_date +
                 ", code_Download=" + code_Download +
                 ", code_Browse=" + code_Browse +
