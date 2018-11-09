@@ -77,18 +77,6 @@ public interface AdminService {
      */
     void deleteAdmin(String ids);
 
-    /**
-     * 查询广告表
-     * @return
-     */
-    List<Advertisement> gettest();
-
-    /**
-     *修改广告表中的广告位所剩时间
-     * @param id
-     * @param newTime
-     */
-    void updataAdvertisement(Integer id, long newTime);
 
     /**
      *过期广告位删除

@@ -20,4 +20,6 @@ public interface StudentDao {
 
 
     void updateStu(Advertisement advertisement);
+
+    List<Advertisement> getAdvertList();
 }

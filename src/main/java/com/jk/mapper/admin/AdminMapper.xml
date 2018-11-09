@@ -6,13 +6,7 @@
 		delete from t_advertisement where id = #{id}
 	</delete>
 
-	<update id="updataAdvertisement">
-		update t_advertisement set secondtime = #{newTime} where id = #{id}
-	</update>
 
-	<select id="gettest" resultType="com.jk.model.admin.Advertisement">
-		select * from t_advertisement
-	</select>
 
 	<delete id="deleteAdmin" parameterType="String">
 		delete from t_admin where aid in

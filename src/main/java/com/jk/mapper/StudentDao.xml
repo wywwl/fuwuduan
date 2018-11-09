@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jk.mapper.StudentDao" >
 
+    <select id="getAdvertList" resultType="com.jk.model.Advertisement">
+        select * from t_advertisement
+    </select>
+
     <select id="getCount" parameterType="com.jk.model.Advertisement" resultType="long">
         select count(*) from t_advertisement
     </select>

@@ -1,8 +1,11 @@
 package com.jk.service;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.jk.mapper.StudentDao;
 import com.jk.model.Advertisement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -17,6 +20,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private StudentDao studentDao;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Override
     public Map<String, Object> queryList(int page, int rows, Advertisement advertisement) {
@@ -42,8 +48,12 @@ public class StudentServiceImpl implements StudentService {
             long time = simpleDateFormat.parse(advertisement.getStarttime()).getTime();//转换成毫秒值
             advertisement.setSecondtime(time);
             studentDao.addStu(advertisement);
+            //查询出所有存入redis
+            List<Advertisement> AdvertList = studentDao.getAdvertList();
+            String listString = JSONArray.toJSONString(AdvertList);
+            redisTemplate.opsForValue().set("advertisementRedis",listString);
         }catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 
