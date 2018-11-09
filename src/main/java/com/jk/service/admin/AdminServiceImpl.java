@@ -2,7 +2,14 @@ package com.jk.service.admin;
 
 import com.jk.mapper.admin.AdminMapper;
 import com.jk.model.admin.*;
+import com.jk.model.aop.Logs;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,6 +23,10 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private AdminMapper adminMapper;
+
+    @Autowired
+    @Lazy
+    private MongoTemplate mongoTemplate;
 
     @Override
     public Admins getUserByName(String login) {
@@ -156,6 +167,20 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deleteAdvertisement(Integer id) {
         adminMapper.deleteAdvertisement(id);
+    }
+
+    @Override
+    public Map<String, Object> getLog(int page, int rows) {
+        Map<String, Object> map = new HashMap<>();
+        Query query = new Query();
+        query.with(new Sort(new Order(Direction.DESC,"createTime")));
+        long count =  mongoTemplate.count(query, Logs.class);
+        map.put("total", count);
+        query.skip((page-1)*rows);
+        query.limit(rows);
+        List<Logs> find = mongoTemplate.find(query, Logs.class);
+        map.put("rows", find);
+        return map;
     }
 
 

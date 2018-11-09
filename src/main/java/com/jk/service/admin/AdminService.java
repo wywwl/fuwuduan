@@ -84,4 +84,18 @@ public interface AdminService {
      */
     void deleteAdvertisement(Integer id);
 
+    /**
+     * 日志
+     * @param page
+     * @param rows
+     * @return
+     */
+    Map<String, Object> getLog(int page, int rows);
+
+
+
+
+
+
+
 }
