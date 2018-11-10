@@ -35,8 +35,8 @@ public class CodeController {
     }
 
     @RequestMapping("qyerycode")
-    public String qyerycode(Model model,Code code){
-     List<Code> list= codeService.qyerycode(code);
+    public String qyerycode(Model model,Code code,String keyword_name,String tname,String ids){
+     List<Code> list= codeService.qyerycode(code,keyword_name,tname,ids);
      model.addAttribute("list",list);
      return  "/view/code.jsp";
     }
@@ -207,11 +207,11 @@ public class CodeController {
     }
 
     @RequestMapping("addblog")
-    public void addblog(Blog blog){
+    public String addblog(Blog blog){
 
         codeService.addblog(blog);
+      return "redirect:/CodeController/qyeryblog";
     }
-
 
 
 

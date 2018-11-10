@@ -4,9 +4,12 @@ package com.jk.service;
 import com.alibaba.fastjson.JSON;
 import com.jk.mapper.CodeMapper;
 import com.jk.model.*;
+import com.jk.utils.OSSClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +17,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class CodeServiceImpl implements  CodeService {
+
+
 
     @Autowired
     private CodeMapper codeMapper;
@@ -73,8 +78,8 @@ public class CodeServiceImpl implements  CodeService {
     }
 
     @Override
-    public List<Code> qyerycode(Code code) {
-        return codeMapper.qyerycode(code);
+    public List<Code> qyerycode(Code code,String keyword_name,String tname,String ids) {
+        return codeMapper.qyerycode(code,keyword_name,tname,ids);
     }
 
     @Override
@@ -194,11 +199,18 @@ public class CodeServiceImpl implements  CodeService {
 
 
     @RequestMapping("addblog")
-    public void addblog(Blog blog){
-
+    @ResponseBody
+    public String addblog(Blog blog){
 
         codeMapper.addblog(blog);
+        return "{}";
     }
+
+
+
+
+
+
 
 
 

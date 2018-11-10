@@ -35,7 +35,7 @@ public interface CodeService {
 
     void theshelves(Code code);
 
-    List<Code> qyerycode(Code code);
+    List<Code> qyerycode(Code code,String keyword_name,String tname,String ids);
 
     List<Blog> qyeryblog(Blog blog);
 
@@ -69,5 +69,5 @@ public interface CodeService {
     List<Comment> querycommnet(Comment comment);
 
 
-    void addblog(Blog blog);
+    String addblog(Blog blog);
 }
