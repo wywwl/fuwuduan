@@ -25,6 +25,7 @@
     <bean id="commentService" class="com.jk.service.CommentServiceImpl" />
     <bean id="codetService" class="com.jk.service.CodeServiceImpl" />
     <bean id="payService" class="com.jk.service.pay.PayServiceImpl" />
+    <bean id="typeService" class="com.jk.service.llf.TypesServiceImpl" />
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.jk.service.StudentService"  ref="stuService" />
     <dubbo:service interface="com.jk.service.CommentService"  ref="commentService" />
@@ -33,4 +34,5 @@
     <dubbo:service interface="com.jk.service.admin.AdminService" ref="adminService" />
     <dubbo:service interface="com.jk.service.CodeService"  ref="codetService" />
     <dubbo:service interface="com.jk.service.pay.PayService" ref="payService" />
+    <dubbo:service interface="com.jk.service.llf.TypesService" ref="typeService" />
 </beans>

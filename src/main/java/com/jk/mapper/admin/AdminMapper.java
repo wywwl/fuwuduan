@@ -41,4 +41,6 @@ public interface AdminMapper {
     
 
     void deleteAdvertisement(Integer id);
+    void addjif(@Param("nbcount") Integer nbcount);
+
 }

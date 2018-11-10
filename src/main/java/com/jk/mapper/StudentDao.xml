@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jk.mapper.StudentDao" >
 
-    <select id="getAdvertList" resultType="com.jk.model.Advertisement">
+    <select id="gettest" resultType="com.jk.model.Advertisement">
         select * from t_advertisement
     </select>
 
@@ -39,5 +39,7 @@
 	  endtime = #{endtime} where id = #{id}
        </update>
 
-
+    <select id="exportXlsx" resultType="com.jk.model.Advertisement">
+        select * from t_advertisement
+    </select>
 </mapper>

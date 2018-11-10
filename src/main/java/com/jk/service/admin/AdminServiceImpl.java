@@ -184,4 +184,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
 
+    @Override
+    public void addjif(Integer nbcount) {
+        adminMapper.addjif(nbcount);
+    }
 }

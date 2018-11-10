@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.llf.TypesDao" >
+
+    <select id="getCount" parameterType="com.jk.model.ActivityBean" resultType="long">
+        select count(*) from t_activity
+    </select>
+
+    <select id="queryList" resultType="com.jk.model.ActivityBean">
+        select a.*,u.name  showname from t_activity a,t_admin u where a.uid = u.aid
+        limit #{st},#{rows}
+    </select>
+
+    <delete id="remUserById"  parameterType="string">
+        delete from t_activity where hid in
+        <foreach collection="array" item="ids" index="index" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
+
+    <select id="queryAdmin" resultType="com.jk.model.Admins">
+        select * from t_admin
+    </select>
+
+    <insert id="addAct" parameterType="com.jk.model.ActivityBean" >
+    insert into t_activity (uid,name,content,startdate,enddate,browse,fabulous,himg,uimg)
+    values (1, #{name},#{content}, #{startdate}, #{enddate},
+      0,0,#{himg},"../img/mp3.jpg")
+  </insert>
+
+    <select id="toAct" resultType="com.jk.model.ActivityBean">
+         select a.*,u.name  showname from t_activity a,t_admin u where a.uid = u.aid
+    </select>
+
+
+    <select id="exportXlsx" parameterType="com.jk.model.ActivityBean" resultType="com.jk.model.ActivityBean">
+        select a.*,u.name  showname from t_activity a,t_admin u where a.uid = u.aid
+	</select>
+</mapper>

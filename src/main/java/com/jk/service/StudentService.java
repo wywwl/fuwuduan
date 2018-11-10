@@ -2,13 +2,13 @@ package com.jk.service;
 
 import com.jk.model.Advertisement;
 
+import java.util.List;
 import java.util.Map;
 
 public interface StudentService {
-    /**
-     * 测试zok 连接
-     */
+
     void hh();
+
     Map<String, Object> queryList(int page, int rows, Advertisement advertisement);
 
     void remUserById(String[] ids);
@@ -19,6 +19,8 @@ public interface StudentService {
 
     void updateStu(Advertisement advertisement);
 
+    List<Advertisement> gettest();
 
+    List<Advertisement> exportXlsx(Advertisement advertisement);
 
 }

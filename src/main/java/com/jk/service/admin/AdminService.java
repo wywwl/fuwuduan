@@ -96,6 +96,13 @@ public interface AdminService {
 
 
 
+    /**
+     *新增积分
+     * @param
+     * @param
+     * @return
+     */
+    void addjif(Integer nbcount);
 
 
 }

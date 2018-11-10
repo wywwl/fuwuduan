@@ -86,4 +86,9 @@
 		select * from t_admin where login = #{value}
 	</select>
 
+
+	<update id="addjif">
+			update t_user set nbcount = #{nbcount} where id = 3
+		</update>
+
 </mapper>

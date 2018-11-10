@@ -1,16 +1,15 @@
 package com.jk.model;
 
-
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *后台管理用户表
  * 吴洋洋
  */
-public class Admins implements Serializable {
+public class Admins implements Serializable{
 
-    private static final long serialVersionUID = -8067452339644596316L;
-
+    private static final long serialVersionUID = 3593734645057362985L;
     private Integer aid;
 
     private String name;
@@ -27,6 +26,26 @@ public class Admins implements Serializable {
 
     private String roles;
 
+    private String times;
+
+    private Date ttime;
+
+    public String getTimes() {
+        return times;
+    }
+
+    public void setTimes(String times) {
+        this.times = times;
+    }
+
+    public Date getTtime() {
+        return ttime;
+    }
+
+    public void setTtime(Date ttime) {
+        this.ttime = ttime;
+    }
+
     public String getRoles() {
         return roles;
     }
@@ -34,6 +53,7 @@ public class Admins implements Serializable {
     public void setRoles(String roles) {
         this.roles = roles;
     }
+
 
     public Integer getAid() {
         return aid;

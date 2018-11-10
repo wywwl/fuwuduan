@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class TypesBean implements Serializable {
-
+    
     private static final long serialVersionUID = -6856952853405097011L;
 
     private Integer id;

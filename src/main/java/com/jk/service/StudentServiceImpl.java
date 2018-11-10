@@ -1,11 +1,8 @@
 package com.jk.service;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.jk.mapper.StudentDao;
 import com.jk.model.Advertisement;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -21,8 +18,10 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentDao studentDao;
 
-    @Autowired
-    private RedisTemplate redisTemplate;
+    @Override
+    public void hh() {
+        System.out.println("成功了");
+    }
 
     @Override
     public Map<String, Object> queryList(int page, int rows, Advertisement advertisement) {
@@ -36,6 +35,7 @@ public class StudentServiceImpl implements StudentService {
         map.put("rows", ulist);
         return map;
     }
+
     @Override
     public void remUserById(String[] ids) {
         studentDao.remUserById(ids);
@@ -43,21 +43,17 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void addStu(Advertisement advertisement){
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");//时间格式
-            long time = simpleDateFormat.parse(advertisement.getStarttime()).getTime();//转换成毫秒值
-            advertisement.setSecondtime(time);
-            studentDao.addStu(advertisement);
-            //查询出所有存入redis
-            List<Advertisement> AdvertList = studentDao.getAdvertList();
-            String listString = JSONArray.toJSONString(AdvertList);
-            redisTemplate.opsForValue().set("advertisementRedis",listString);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    try {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        long time = simpleDateFormat.parse(advertisement.getStarttime()).getTime();
+        long times = simpleDateFormat.parse(advertisement.getEndtime()).getTime();
+        advertisement.setSecondtime(times-time);
+        studentDao.addStu(advertisement);
+    }  catch (Exception e){
+    }
     }
 
-    @Override
+        @Override
     public Advertisement getStuById(Advertisement advertisement) {
         return studentDao.getStuById(advertisement);
     }
@@ -67,7 +63,15 @@ public class StudentServiceImpl implements StudentService {
         studentDao.updateStu(advertisement);
     }
 
-    public void hh() {
-        System.out.println("成功");
+    @Override
+    public List<Advertisement> gettest() {
+        return studentDao.gettest();
     }
+
+    @Override
+    public List<Advertisement> exportXlsx(Advertisement advertisement) {
+        return studentDao.exportXlsx(advertisement);
+    }
+
+
 }

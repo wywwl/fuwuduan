@@ -9,7 +9,7 @@ public interface StudentDao {
 
     long getCount(Advertisement advertisement);
 
-    List<Advertisement> queryList(@Param("st")int start, @Param("rows")int rows, @Param("advertisement")Advertisement advertisement);
+    List<Advertisement> queryList(@Param("st") int start, @Param("rows") int rows, @Param("advertisement") Advertisement advertisement);
 
     void remUserById(String[] ids);
 
@@ -17,9 +17,9 @@ public interface StudentDao {
 
     Advertisement getStuById(Advertisement advertisement);
 
-
-
     void updateStu(Advertisement advertisement);
 
-    List<Advertisement> getAdvertList();
+    List<Advertisement> gettest();
+
+    List<Advertisement> exportXlsx(Advertisement advertisement);
 }
