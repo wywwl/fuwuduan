@@ -1,8 +1,8 @@
-package com.jk.service.impl;
+package com.jk.service.problem.impl;
 
-import com.jk.mapper.PrtoblemMapper;
-import com.jk.model.Problem;
-import com.jk.service.ProblemService;
+import com.jk.mapper.problem.PrtoblemMapper;
+import com.jk.model.problem.Problem;
+import com.jk.service.problem.ProblemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

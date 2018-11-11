@@ -1,7 +1,7 @@
-package com.jk.service;
+package com.jk.service.problem;
 
 
-import com.jk.model.Problem;
+import com.jk.model.problem.Problem;
 
 import java.util.List;
 

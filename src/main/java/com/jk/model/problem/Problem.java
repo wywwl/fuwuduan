@@ -1,4 +1,4 @@
-package com.jk.model;
+package com.jk.model.problem;
 import java.io.Serializable;
 import java.util.Date;
 
