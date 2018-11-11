@@ -1,6 +1,7 @@
 package com.jk.service.admin;
 
 import com.jk.model.admin.*;
+import com.jk.model.aop.CodeLog;
 
 import java.util.List;
 import java.util.Map;
@@ -103,6 +104,13 @@ public interface AdminService {
      * @return
      */
     void addjif(Integer nbcount);
+
+
+    /**
+     * 个人足迹
+     * @return
+     */
+    List<CodeLog> getMongodbFootprint();
 
 
 }

@@ -80,7 +80,7 @@ public interface CodeMapper {
      * 代码前台  查询后台跳转前台页面
      * */
 
-    @Select("select t1.code_id as code_id,t1.code_title as code_title," +
+    @Select("<script>select t1.code_id as code_id,t1.code_title as code_title," +
             "t1.code_content as code_content, t1.code_nb as code_nb," +
                     " t1.code_Release_date as code_Release_date,t1.comment as comment," +
                     "t1.code_Download as code_Download, t1.code_Browse as code_Browse," +
@@ -88,9 +88,19 @@ public interface CodeMapper {
                     "t3.grade as grade," +
                     "GROUP_CONCAT(t2.keyword_name SEPARATOR ',') keyword_name" +
                     " from t_code t1 ,Keyword_intermediate_table t2,t_user t3,t_type t4" +
-                    "  where t1.code_id=t2.dome_id and t1.code_user_id=t3.id and t1.code_type_id=t4.id  and t1.start=1 " +
-                    " GROUP BY  t1.code_Id  ")
-     List<Code> qyerycode(@Param("code") Code code);
+                    "  where t1.code_id=t2.dome_id and t1.code_user_id=t3.id and t1.code_type_id=t4.id " +
+                    " and t1.start=1" +
+                    " <if test=' keyword_name != null and keyword_name != null'>" +
+                    " and  t2.keyword_name=#{keyword_name}" +
+                    "</if> " +
+                    "<if test=' tname != null and tname != null'>" +
+                    " and  t4.tname=#{tname}" +
+                    "</if>" +
+                    " <if test=' ids != null and ids != null'>" +
+                    " and  t4.id=#{ids} " +
+                    "</if>" +
+                    "GROUP BY  t1.code_Id  </script>")
+     List<Code> qyerycode(@Param("code") Code code,@Param("keyword_name") String keyword_name,@Param("tname") String tname,@Param("ids") String ids);
 
     /*
      * 博客前台  查询后台跳转前台页面

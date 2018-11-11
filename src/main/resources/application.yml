@@ -11,7 +11,7 @@ spring:
     hibernate:
       ddl-auto: update
   redis:
-    host: 127.0.0.1
+    host: 192.168.1.136
     port: 6379
     jedis:
       pool:
@@ -19,4 +19,4 @@ spring:
         min-idle: 0
   data:
     mongodb:
-      uri: mongodb://192.168.1.111:27017/project
+      uri: mongodb://192.168.1.109:27017/project

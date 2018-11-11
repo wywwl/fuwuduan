@@ -2,6 +2,7 @@ package com.jk.service.admin;
 
 import com.jk.mapper.admin.AdminMapper;
 import com.jk.model.admin.*;
+import com.jk.model.aop.CodeLog;
 import com.jk.model.aop.Logs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -188,4 +189,16 @@ public class AdminServiceImpl implements AdminService {
     public void addjif(Integer nbcount) {
         adminMapper.addjif(nbcount);
     }
+
+
+    @Override
+    public List<CodeLog> getMongodbFootprint() {
+        Query query = new Query();
+        query.with(new Sort(new Order(Direction.DESC,"startTime")));
+        long count =  mongoTemplate.count(query, CodeLog.class);
+        List<CodeLog> find = mongoTemplate.find(query, CodeLog.class);
+        return find;
+    }
+
+
 }
