@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CommentMapper   {
 
@@ -59,4 +60,16 @@ public interface CommentMapper   {
     void update(UserBean user);
 
     UserBean findInfoById(Integer id);
+
+    List<Mood> getMoodList(Mood mood);
+ @Select(" SELECT COUNT(*) FROM T_USER")
+    Integer getUsercount();
+  @Select("  SELECT COUNT(*) as value,QUARTER(date_format(CreateTime,'%Y%m%d')) as name FROM t_user WHERE YEAR(date_format(CreateTime,'%Y%m%d')) = '2018' GROUP BY QUARTER(date_format(CreateTime,'%Y%m%d'))   ")
+  List<Map<String,Object>> getGroupWeekData();
+
+    void saveMood(Mood mood);
+
+    int findpagecount(PageBean<Jifen> page);
+
+    List<Jifen> findpage(PageBean<Jifen> page);
 }

@@ -315,14 +315,14 @@
         from t_user t1 left join jbbs_group_user t2 on t1.id=t2.userid left join jbbs_group t3 on t2.groupid=t3.id
       where   t1.id = #{id,jdbcType=INTEGER}
     </select>
-
+    <!--where   t1.login = #{login,jdbcType=VARCHAR} and  t1.upwds = #{upwds,jdbcType=VARCHAR}-->
     <select id="find"    parameterType="com.jk.model.UserBean"  resultType="com.jk.model.UserBean" >
         select
         t1.id, t1.name, t1.login, t1.upwds as upwds, t1.file, t1.uemial, t1.sex, t1.address, t1.createtime,
         t1.lastlogintime, t1.zhuceip, t1.loginip, t1.flag, t1.jifen,t3.id groupid ,t3.groupname
         from t_user t1 left join jbbs_group_user t2 on t1.id=t2.userid left join jbbs_group t3 on t2.groupid=t3.id
-     where   t1.login = #{login,jdbcType=VARCHAR} and  t1.upwds = #{upwds,jdbcType=VARCHAR}
-      <!--<where>
+
+         <where>
         <if test="id != null and id !=0" >
             and  t1.id = #{id,jdbcType=INTEGER}
         </if>
@@ -335,7 +335,10 @@
         <if test="upwds != null and upwds!='' " >
             and  t1.upwds = #{upwds,jdbcType=VARCHAR}
         </if>
-        </where>-->
+             <if test="uemial != null and uemial!='' " >
+                 and  t1.uemial = #{uemial,jdbcType=VARCHAR}
+             </if>
+        </where>
     </select>
 
 
@@ -525,9 +528,8 @@
 
 
 
-
-
-   <!-- <resultMap id="BaseResultMap" type="com.jk.model.Mood" >
+<!--
+    <resultMap id="BaseResultMap" type="com.jk.model.Mood" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="createtime" property="createtime" jdbcType="VARCHAR" />
@@ -551,17 +553,286 @@
     <sql id="Blob_Column_List" >
     contenthtml, contenttxt
   </sql>
-    &lt;!&ndash;parameterType="java.lang.Integer"    where id = #{id,jdbcType=INTEGER}&ndash;&gt;
-    <select id="getMoodData" resultMap="ResultMapWithBLOBs" >
-        select
-        <include refid="Base_Column_List" />
-        ,
-        <include refid="Blob_Column_List" />
-        from jbbs_tiezi
+    -->
 
+   <!-- where id = #{id,jdbcType=INTEGER}-->
+    <select id="getMoodList" resultType="com.jk.model.Mood" parameterType="com.jk.model.Mood" >
+        select
+        t1.id, t1.name, t1.createtime, t1.createuserid, t1.bankuai_id, t1.zhutiid, t1.lastupdate, t1.jinghua, t1.zhiding,
+        t1.findcount, t1.huifuid
+        , t1.contenthtml, t1.contenttxt,t1.praiseCount , t1.stepCount,
+       t2.`name` as names,
+        t2.address as address ,t2.file as file
+        from jbbs_tiezi t1
+        left  join t_user t2 on t1.createuserid = t2.id
+       order by praiseCount desc
     </select>
 
--->
+
+
+
+<insert id="saveMood" parameterType="com.jk.model.Mood" >
+insert into jbbs_tiezi
+<trim prefix="(" suffix=")" suffixOverrides="," >
+    <if test="id != null" >
+        id,
+    </if>
+    <if test="name != null" >
+        name,
+    </if>
+    <if test="createtime != null" >
+        createtime,
+    </if>
+    <if test="createuserid != null" >
+        createuserid,
+    </if>
+    <if test="bankuaiId != null" >
+        bankuai_id,
+    </if>
+    <if test="zhutiid != null" >
+        zhutiid,
+    </if>
+    <if test="lastupdate != null" >
+        lastupdate,
+    </if>
+    <if test="jinghua != null" >
+        jinghua,
+    </if>
+    <if test="zhiding != null" >
+        zhiding,
+    </if>
+    <if test="findcount != null" >
+        findcount,
+    </if>
+    <if test="huifuid != null" >
+        huifuid,
+    </if>
+    <if test="contenthtml != null" >
+        contenthtml,
+    </if>
+    <if test="contenttxt != null" >
+        contenttxt,
+    </if>
+</trim>
+<trim prefix="values (" suffix=")" suffixOverrides="," >
+    <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+    </if>
+    <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+    </if>
+    <if test="createtime != null" >
+        #{createtime,jdbcType=VARCHAR},
+    </if>
+    <if test="createuserid != null" >
+        #{createuserid,jdbcType=INTEGER},
+    </if>
+    <if test="bankuaiId != null" >
+        #{bankuaiId,jdbcType=INTEGER},
+    </if>
+    <if test="zhutiid != null" >
+        #{zhutiid,jdbcType=VARCHAR},
+    </if>
+    <if test="lastupdate != null" >
+        #{lastupdate,jdbcType=VARCHAR},
+    </if>
+    <if test="jinghua != null" >
+        #{jinghua,jdbcType=VARCHAR},
+    </if>
+    <if test="zhiding != null" >
+        #{zhiding,jdbcType=VARCHAR},
+    </if>
+    <if test="findcount != null" >
+        #{findcount,jdbcType=INTEGER},
+    </if>
+    <if test="huifuid != null" >
+        #{huifuid,jdbcType=INTEGER},
+    </if>
+    <if test="contenthtml != null" >
+        #{contenthtml,jdbcType=LONGVARCHAR},
+    </if>
+    <if test="contenttxt != null" >
+        #{contenttxt,jdbcType=LONGVARCHAR},
+    </if>
+</trim>
+</insert>
+
+
+
+   <!-- <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from jbbs_tiezi
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.jk.model.MoodWithBLOBs" >
+    insert into jbbs_tiezi (id, name, createtime,
+      createuserid, bankuai_id, zhutiid,
+      lastupdate, jinghua, zhiding,
+      findcount, huifuid, contenthtml,
+      contenttxt)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createtime,jdbcType=VARCHAR},
+      #{createuserid,jdbcType=INTEGER}, #{bankuaiId,jdbcType=INTEGER}, #{zhutiid,jdbcType=VARCHAR},
+      #{lastupdate,jdbcType=VARCHAR}, #{jinghua,jdbcType=VARCHAR}, #{zhiding,jdbcType=VARCHAR},
+      #{findcount,jdbcType=INTEGER}, #{huifuid,jdbcType=INTEGER}, #{contenthtml,jdbcType=LONGVARCHAR},
+      #{contenttxt,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.jk.model.MoodWithBLOBs" >
+        insert into jbbs_tiezi
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="createtime != null" >
+                createtime,
+            </if>
+            <if test="createuserid != null" >
+                createuserid,
+            </if>
+            <if test="bankuaiId != null" >
+                bankuai_id,
+            </if>
+            <if test="zhutiid != null" >
+                zhutiid,
+            </if>
+            <if test="lastupdate != null" >
+                lastupdate,
+            </if>
+            <if test="jinghua != null" >
+                jinghua,
+            </if>
+            <if test="zhiding != null" >
+                zhiding,
+            </if>
+            <if test="findcount != null" >
+                findcount,
+            </if>
+            <if test="huifuid != null" >
+                huifuid,
+            </if>
+            <if test="contenthtml != null" >
+                contenthtml,
+            </if>
+            <if test="contenttxt != null" >
+                contenttxt,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null" >
+                #{createtime,jdbcType=VARCHAR},
+            </if>
+            <if test="createuserid != null" >
+                #{createuserid,jdbcType=INTEGER},
+            </if>
+            <if test="bankuaiId != null" >
+                #{bankuaiId,jdbcType=INTEGER},
+            </if>
+            <if test="zhutiid != null" >
+                #{zhutiid,jdbcType=VARCHAR},
+            </if>
+            <if test="lastupdate != null" >
+                #{lastupdate,jdbcType=VARCHAR},
+            </if>
+            <if test="jinghua != null" >
+                #{jinghua,jdbcType=VARCHAR},
+            </if>
+            <if test="zhiding != null" >
+                #{zhiding,jdbcType=VARCHAR},
+            </if>
+            <if test="findcount != null" >
+                #{findcount,jdbcType=INTEGER},
+            </if>
+            <if test="huifuid != null" >
+                #{huifuid,jdbcType=INTEGER},
+            </if>
+            <if test="contenthtml != null" >
+                #{contenthtml,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="contenttxt != null" >
+                #{contenttxt,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jk.model.MoodWithBLOBs" >
+        update jbbs_tiezi
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null" >
+                createtime = #{createtime,jdbcType=VARCHAR},
+            </if>
+            <if test="createuserid != null" >
+                createuserid = #{createuserid,jdbcType=INTEGER},
+            </if>
+            <if test="bankuaiId != null" >
+                bankuai_id = #{bankuaiId,jdbcType=INTEGER},
+            </if>
+            <if test="zhutiid != null" >
+                zhutiid = #{zhutiid,jdbcType=VARCHAR},
+            </if>
+            <if test="lastupdate != null" >
+                lastupdate = #{lastupdate,jdbcType=VARCHAR},
+            </if>
+            <if test="jinghua != null" >
+                jinghua = #{jinghua,jdbcType=VARCHAR},
+            </if>
+            <if test="zhiding != null" >
+                zhiding = #{zhiding,jdbcType=VARCHAR},
+            </if>
+            <if test="findcount != null" >
+                findcount = #{findcount,jdbcType=INTEGER},
+            </if>
+            <if test="huifuid != null" >
+                huifuid = #{huifuid,jdbcType=INTEGER},
+            </if>
+            <if test="contenthtml != null" >
+                contenthtml = #{contenthtml,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="contenttxt != null" >
+                contenttxt = #{contenttxt,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jk.model.MoodWithBLOBs" >
+    update jbbs_tiezi
+    set name = #{name,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=VARCHAR},
+      createuserid = #{createuserid,jdbcType=INTEGER},
+      bankuai_id = #{bankuaiId,jdbcType=INTEGER},
+      zhutiid = #{zhutiid,jdbcType=VARCHAR},
+      lastupdate = #{lastupdate,jdbcType=VARCHAR},
+      jinghua = #{jinghua,jdbcType=VARCHAR},
+      zhiding = #{zhiding,jdbcType=VARCHAR},
+      findcount = #{findcount,jdbcType=INTEGER},
+      huifuid = #{huifuid,jdbcType=INTEGER},
+      contenthtml = #{contenthtml,jdbcType=LONGVARCHAR},
+      contenttxt = #{contenttxt,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.jk.model.Mood" >
+    update jbbs_tiezi
+    set name = #{name,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=VARCHAR},
+      createuserid = #{createuserid,jdbcType=INTEGER},
+      bankuai_id = #{bankuaiId,jdbcType=INTEGER},
+      zhutiid = #{zhutiid,jdbcType=VARCHAR},
+      lastupdate = #{lastupdate,jdbcType=VARCHAR},
+      jinghua = #{jinghua,jdbcType=VARCHAR},
+      zhiding = #{zhiding,jdbcType=VARCHAR},
+      findcount = #{findcount,jdbcType=INTEGER},
+      huifuid = #{huifuid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>-->
+
 
 
 
@@ -690,5 +961,60 @@
 
 
 
+
+
+
+
+    <select id="findpage" resultType="com.jk.model.Jifen" parameterType="com.jk.model.PageBean" >
+
+        select
+        id, content, type, createtime, fenshu, userid,operateuserid
+        from jbbs_jifen t1
+        where 1=1
+        <if test="bean.id != null" >
+            and t1.id = #{bean.id,jdbcType=INTEGER}
+        </if>
+        <if test="bean.userid != null" >
+            and t1.userid = #{bean.userid,jdbcType=INTEGER}
+        </if>
+        <if test="bean.type != null and bean.type!=''" >
+            and t1.type = #{bean.type,jdbcType=VARCHAR}
+        </if>
+        <if test="bean.starttime != null  and bean.starttime!=''" >
+            and t1.createtime >= '${bean.starttime} 00:00:00'
+        </if>
+        <if test="bean.endtime != null  and bean.endtime!=''" >
+            <![CDATA[   and t1.createtime <= '${bean.endtime} 23:59:59' ]]>
+        </if>
+        ORDER BY t1.id desc
+        LIMIT ${pageNo}, ${pageSize}
+
+    </select>
+
+
+
+
+    <select id="findpagecount" resultType="java.lang.Integer" parameterType="com.jk.model.PageBean" >
+
+    select
+    count(*)
+    from jbbs_jifen t1 where 1=1
+    <if test="bean.id != null" >
+        and t1.id = #{bean.id,jdbcType=INTEGER}
+    </if>
+    <if test="bean.userid != null" >
+        and t1.userid = #{bean.userid,jdbcType=INTEGER}
+    </if>
+    <if test="bean.type != null and bean.type!=''" >
+        and t1.type = #{bean.type,jdbcType=VARCHAR}
+    </if>
+    <if test="bean.starttime != null  and bean.starttime!=''" >
+        and t1.createtime >= '${bean.starttime} 00:00:00'
+    </if>
+    <if test="bean.endtime != null  and bean.endtime!=''" >
+        <![CDATA[   and t1.createtime <= '${bean.endtime} 23:59:59' ]]>
+    </if>
+
+</select>
 
 </mapper>
