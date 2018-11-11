@@ -1,6 +1,7 @@
 package com.jk.service.userService;
 
 import com.alibaba.fastjson.JSONObject;
+import com.jk.model.Code;
 import com.jk.model.userModel.UserBean;
 
 /**
@@ -9,5 +10,7 @@ import com.jk.model.userModel.UserBean;
 public interface UserService {
 
     JSONObject loginuser(UserBean user);
+
+    void addCodes(Code d);
 
 }

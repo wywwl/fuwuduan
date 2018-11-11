@@ -12,6 +12,10 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -26,6 +30,47 @@ public class CommentServiceImpl   implements  CommentService {
 
     @Autowired
     private CommentMapper commentMepper;
+
+    @Override
+    public List<Mood> getMoodList(Mood mood) {
+      List<Mood> moods=  commentMepper.getMoodList(mood);
+        return  moods;
+    }
+
+    @Override
+    public List<Map<String,Object>> findGroupWeekData() {
+
+       return  commentMepper.getGroupWeekData();
+    }
+
+    @Override
+    public void saveMood(Mood mood) {
+
+        commentMepper.saveMood(mood);
+
+    }
+
+
+    @Override
+    public PageBean<Jifen> findpage(Jifen jifen, PageBean<Jifen> page) {
+        page.setBean(jifen);
+       int count= commentMepper.findpagecount(page);
+        page.setTotalRecords(count);
+        List<Jifen> list = commentMepper.findpage(page);
+        page.setList(list);
+        System.out.println(list);
+         return page;
+    }
+
+    @Override
+    public List<UserBean> getUserInfo(UserBean user) {
+
+        List<UserBean> u= commentMepper.getUserInfo(user);
+        if(u.size()>0){
+            return u;
+        }
+        return null;
+    }
 
     @Autowired
     private  HttpServletRequest request;
@@ -208,6 +253,16 @@ public class CommentServiceImpl   implements  CommentService {
     public UserBean findbyuserid(Integer id) {
 
             return  commentMepper.findInfoById(id);
+    }
+
+    @Override
+    public List<UserBean> findUserInfo(UserBean users) {
+        return commentMepper.find(users);
+    }
+
+    @Override
+    public Integer getCount() {
+        return commentMepper.getUsercount();
     }
 
 

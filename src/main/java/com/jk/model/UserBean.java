@@ -19,63 +19,18 @@ public class UserBean implements Serializable {
     private String login;
 
     private String upwds;
-    private String address;
-    private String webage;
-    private String uemial;
-    private Double years;
 
+    private String address;
+
+    private String uemial;
 
     private String qianming;
-    private String file;
-    private int page;
-    private String gradeFile;
 
-    private int rows;
     //创建时间
     private String createtime;
 
     //最后登陆时间
     private String lastlogintime;
-
-    public String getGradeFile() {
-        return gradeFile;
-    }
-
-    public void setGradeFile(String gradeFile) {
-        this.gradeFile = gradeFile;
-    }
-
-    public Double getYears() {
-        return years;
-    }
-
-    public void setYears(Double years) {
-        this.years = years;
-    }
-
-    public String getWebage() {
-        return webage;
-    }
-
-    public void setWebage(String webage) {
-        this.webage = webage;
-    }
-
-    public int getPage() {
-        return page;
-    }
-
-    public void setPage(int page) {
-        this.page = page;
-    }
-
-    public int getRows() {
-        return rows;
-    }
-
-    public void setRows(int rows) {
-        this.rows = rows;
-    }
 
     //注册ip
     private String zhuceip;
@@ -89,19 +44,45 @@ public class UserBean implements Serializable {
     //积分
     private Integer jifen;
 
+
+    //用户登记
+    private Integer grade;
     //用户组名称
     private String groupname;
     //用户组id
     private Integer groupid;
 
-    //用户登记
-    private Integer grade;
-    //nb数
-    private Integer nbcount;
-    //地址
+    private String file;
+
+   //地址
     private   String pathlocation;
     //验证码
     private String yanzhengma;
+
+    private String webage;
+
+    private Double years;
+
+
+    public String getWebage() {
+        return webage;
+    }
+
+    public void setWebage(String webage) {
+        this.webage = webage;
+    }
+
+    public Double getYears() {
+        return years;
+    }
+
+    public void setYears(Double years) {
+        this.years = years;
+    }
+
+    //nb数
+    private Integer nbcount;
+
 
     private int counts ;//统计个数
 
@@ -125,6 +106,23 @@ public class UserBean implements Serializable {
         this.value = value;
     }
 
+    public Integer getNbcount() {
+        return nbcount;
+    }
+
+    public void setNbcount(Integer nbcount) {
+        this.nbcount = nbcount;
+    }
+
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
+
+    /* m6Wau+VuBX8g+IPg==*/
     public String getPathlocation() {
         return pathlocation;
     }
@@ -140,23 +138,6 @@ public class UserBean implements Serializable {
     public void setYanzhengma(String yanzhengma) {
         this.yanzhengma = yanzhengma;
     }
-
-    public Integer getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Integer grade) {
-        this.grade = grade;
-    }
-
-    public Integer getNbcount() {
-        return nbcount;
-    }
-
-    public void setNbcount(Integer nbcount) {
-        this.nbcount = nbcount;
-    }
-
     public String getFile() {
         return file;
     }
@@ -301,4 +282,3 @@ public class UserBean implements Serializable {
         this.uemial = uemial;
     }
 }
-

@@ -4,14 +4,16 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 王玉荣
  */
 @Document(collection="CodeLog")
-public class CodeLog {
+public class CodeLog implements Serializable {
 
+    private static final long serialVersionUID = -179213658045738919L;
     private String id;
     private String userId;
     private     Integer   code_id;

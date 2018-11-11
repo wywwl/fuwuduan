@@ -1,5 +1,6 @@
 package com.jk.mapper.userMapper;
 
+import com.jk.model.Code;
 import com.jk.model.activeModel.ActiveBean;
 import com.jk.model.userModel.UserBean;
 import org.apache.ibatis.annotations.Mapper;
@@ -18,4 +19,6 @@ public interface UserMapper {
 
     @Select("select * from t_user where name = #{name}")
     List<UserBean> checkName(@Param("name")String name);
+
+    void addCodes(Code d);
 }

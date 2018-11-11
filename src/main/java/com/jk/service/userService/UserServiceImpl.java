@@ -2,6 +2,7 @@ package com.jk.service.userService;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jk.mapper.userMapper.UserMapper;
+import com.jk.model.Code;
 import com.jk.model.userModel.UserBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,10 @@ public class UserServiceImpl implements UserService {
         }
         json.put("flag", flag);
         return json;
+    }
+
+    @Override
+    public void addCodes(Code d) {
+        userMapper.addCodes(d);
     }
 }

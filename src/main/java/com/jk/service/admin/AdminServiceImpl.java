@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
@@ -192,10 +193,10 @@ public class AdminServiceImpl implements AdminService {
 
 
     @Override
-    public List<CodeLog> getMongodbFootprint() {
+    public List<CodeLog> getMongodbFootprint(Integer id) {
         Query query = new Query();
+        query = Query.query(Criteria.where("userId").regex(".*?"+id+".*"));
         query.with(new Sort(new Order(Direction.DESC,"startTime")));
-        long count =  mongoTemplate.count(query, CodeLog.class);
         List<CodeLog> find = mongoTemplate.find(query, CodeLog.class);
         return find;
     }

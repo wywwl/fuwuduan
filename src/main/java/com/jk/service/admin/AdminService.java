@@ -110,7 +110,7 @@ public interface AdminService {
      * 个人足迹
      * @return
      */
-    List<CodeLog> getMongodbFootprint();
+    List<CodeLog> getMongodbFootprint(Integer id);
 
 
 }

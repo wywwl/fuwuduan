@@ -57,6 +57,47 @@ public class Mood implements Serializable {
     //排序
     private String orderby;
 
+    private String names;
+    private String address;
+
+    private String file ;
+
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
+
+    private String contenttxt;
+
+
+
+    public String getContenttxt() {
+        return contenttxt;
+    }
+
+    public void setContenttxt(String contenttxt) {
+        this.contenttxt = contenttxt == null ? null : contenttxt.trim();
+    }
+
+    public String getNames() {
+        return names;
+    }
+
+    public void setNames(String names) {
+        this.names = names;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     private int praiseCount;//点赞数
 

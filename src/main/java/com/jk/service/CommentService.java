@@ -3,6 +3,8 @@ package com.jk.service;
 import com.jk.model.*;
 import com.jk.util.ResultPage;
 
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.List;
@@ -83,5 +85,23 @@ public interface CommentService   {
     void update(UserBean user);
    //登录 用户id
    UserBean findbyuserid(Integer id);
+    List<UserBean> findUserInfo(UserBean users);
+    Integer getCount();
 
+    //心情展示
+    List<Mood> getMoodList(Mood mood);
+
+    //统计每周的注册人数
+    List<Map<String,Object>> findGroupWeekData();
+
+
+    //发表评论
+    void saveMood(Mood  mood);
+
+
+    //查询积分
+    PageBean<Jifen> findpage(Jifen jifen, PageBean<Jifen> page);
+
+
+    List<UserBean> getUserInfo(UserBean user);
 }
