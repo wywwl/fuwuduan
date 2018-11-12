@@ -19,4 +19,4 @@ spring:
         min-idle: 0
   data:
     mongodb:
-      uri: mongodb://192.168.204.128:27017/project
+      uri: mongodb://192.168.1.111:27017/project

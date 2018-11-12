@@ -222,6 +222,9 @@ public interface CodeMapper {
 
      @Insert("insert into t_blog  values(#{blog.blog_id},#{blog.blog_title},#{blog.blog_content},SYSDATE(),1,0,0)")
      void addblog(@Param("blog") Blog blog);
+     @Select(  "   select    code_Id, code_title, code_content, code_nb, code_type_id, code_user_id, code_Release_date, \n" +
+             "    code_Download, comment, start, code_Browse    from t_code" )
+    List<Code> queryMasterCode();
 }
 
 

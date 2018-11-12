@@ -40,6 +40,12 @@ public class CodeServiceImpl implements  CodeService {
 
     }
 
+    @Override
+    public List<Code> queryMasterCode() {
+
+
+        return codeMapper.queryMasterCode();
+    }
 
 
     @Override

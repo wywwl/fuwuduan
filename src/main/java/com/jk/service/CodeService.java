@@ -22,6 +22,8 @@ public interface CodeService {
     HashMap<String, Object> queryCode(Integer pageSize, Integer start);
 
 
+    List<Code> queryMasterCode();
+
     /*
      *
      *
